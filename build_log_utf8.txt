@@ -1,0 +1,190 @@
+﻿docker : #0 building with 
+"desktop-linux" instance 
+using docker driver
+At line:1 char:1
++ docker build -t 
+frontend-test ./frontend 
+--build-arg 
+VITE_API_BASE_UR ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (#0 bu  
+  ilding wit...g docker d   
+ river:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+
+#1 [internal] load build 
+definition from Dockerfile
+#1 transferring dockerfile: 
+573B 0.0s done
+#1 DONE 0.0s
+
+#2 [auth] library/node:pull 
+token for 
+registry-1.docker.io
+#2 DONE 0.0s
+
+#3 [auth] 
+library/nginx:pull token 
+for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata 
+for docker.io/library/nginx:
+alpine
+#4 DONE 1.8s
+
+#5 [internal] load metadata 
+for docker.io/library/node:1
+8-alpine
+#5 DONE 2.2s
+
+#6 [internal] load 
+.dockerignore
+#6 transferring context: 2B 
+done
+#6 DONE 0.0s
+
+#7 [internal] load build 
+context
+#7 DONE 0.0s
+
+#8 [build 1/6] FROM docker.i
+o/library/node:18-alpine@sha
+256:8d6421d663b4c28fd3ebc498
+332f249011d118945588d0a35cb9
+bc4b8ca09d9e
+#8 resolve docker.io/library
+/node:18-alpine@sha256:8d642
+1d663b4c28fd3ebc498332f24901
+1d118945588d0a35cb9bc4b8ca09
+d9e 0.0s done
+#8 DONE 0.0s
+
+#9 [stage-1 1/2] FROM docker
+.io/library/nginx:alpine@sha
+256:f46cb72c7df02710e693e863
+a983ac42f6a9579058a59a35f1ae
+36c9958e4ce0
+#9 resolve docker.io/library
+/nginx:alpine@sha256:f46cb72
+c7df02710e693e863a983ac42f6a
+9579058a59a35f1ae36c9958e4ce
+0 0.0s done
+#9 CACHED
+
+#7 [internal] load build 
+context
+#7 transferring context: 
+1.05MB 1.6s done
+#7 DONE 1.8s
+
+#10 [build 4/6] RUN npm 
+install
+#10 CACHED
+
+#11 [build 2/6] WORKDIR /app
+#11 CACHED
+
+#12 [build 3/6] COPY 
+package*.json ./
+#12 CACHED
+
+#13 [build 5/6] COPY . .
+#13 CACHED
+
+#14 [build 6/6] RUN npm run 
+build
+#14 1.517 
+#14 1.517 > frontend@0.0.0 
+build
+#14 1.517 > vite build
+#14 1.517 
+#14 1.609 You are using 
+Node.js 18.20.8. Vite 
+requires Node.js version 
+20.19+ or 22.12+. Please 
+upgrade your Node.js 
+version.
+#14 1.615 file:///app/node_m
+odules/vite/dist/node/cli.js
+:534
+#14 1.615 				
+this.dispatchEvent(new Custo
+mEvent(`command:${commandNam
+e}`, { detail: command }));
+#14 1.615 				              
+         ^
+#14 1.615 
+#14 1.615 ReferenceError: 
+CustomEvent is not defined
+#14 1.615     at CAC.parse (
+file:///app/node_modules/vit
+e/dist/node/cli.js:534:28)
+#14 1.615     at file:///app
+/node_modules/vite/dist/node
+/cli.js:835:5
+#14 1.615     at 
+ModuleJob.run (node:internal
+/modules/esm/module_job:195:
+25)
+#14 1.615     at async 
+ModuleLoader.import (node:in
+ternal/modules/esm/loader:33
+7:24)
+#14 1.615 
+#14 1.615 Node.js v18.20.8
+#14 ERROR: process "/bin/sh 
+-c npm run build" did not 
+complete successfully: exit 
+code: 1
+------
+ > [build 6/6] RUN npm run 
+build:
+1.615 				
+this.dispatchEvent(new Custo
+mEvent(`command:${commandNam
+e}`, { detail: command }));
+1.615 				                  
+     ^
+1.615 
+1.615 ReferenceError: 
+CustomEvent is not defined
+1.615     at CAC.parse (file
+:///app/node_modules/vite/di
+st/node/cli.js:534:28)
+1.615     at file:///app/nod
+e_modules/vite/dist/node/cli
+.js:835:5
+1.615     at ModuleJob.run (
+node:internal/modules/esm/mo
+dule_job:195:25)
+1.615     at async 
+ModuleLoader.import (node:in
+ternal/modules/esm/loader:33
+7:24)
+1.615 
+1.615 Node.js v18.20.8
+------
+Dockerfile:12
+--------------------
+  10 |     ARG 
+VITE_API_BASE_URL
+  11 |     ENV VITE_API_BASE
+_URL=$VITE_API_BASE_URL
+  12 | >>> RUN npm run build
+  13 |     
+  14 |     # Stage 2: Serve 
+the production build using 
+Nginx
+--------------------
+ERROR: failed to build: 
+failed to solve: process 
+"/bin/sh -c npm run build" 
+did not complete 
+successfully: exit code: 1

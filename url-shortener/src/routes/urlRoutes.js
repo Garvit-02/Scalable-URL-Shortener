@@ -1,5 +1,5 @@
 import express from 'express';
-import { createShortUrl, redirectToOriginalUrl } from '../controllers/urlController.js';
+import { createShortUrl, redirectToOriginalUrl, getUrlList, getAnalytics } from '../controllers/urlController.js';
 
 const router = express.Router();
 
@@ -8,6 +8,18 @@ const router = express.Router();
  * @desc Create short URL
  */
 router.post('/shorten', createShortUrl);
+
+/**
+ * @route GET /api/url/list
+ * @desc Get all URL mappings
+ */
+router.get('/list', getUrlList);
+
+/**
+ * @route GET /api/url/analytics
+ * @desc Get analytics summary
+ */
+router.get('/analytics', getAnalytics);
 
 /**
  * Note: The redirect route GET /:shortCode should be placed in the main app file 

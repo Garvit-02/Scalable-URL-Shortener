@@ -18,6 +18,13 @@ const urlSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  analytics: [
+    {
+      timestamp: { type: Date, default: Date.now },
+      userAgent: String,
+      ipAddress: String,
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,
