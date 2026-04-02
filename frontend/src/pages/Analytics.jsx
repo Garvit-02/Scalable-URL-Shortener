@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { getAnalytics } from '../services/api';
-import { ClicksBarChart, DevicePieChart } from '../components/Charts';
+import AnalyticsChart from '../components/AnalyticsChart';
 import { 
   BarChart3, 
   TrendingUp, 
   Calendar, 
   Download,
   Loader2,
-  PieChart as PieChartIcon,
   Activity
 } from 'lucide-react';
 
@@ -31,96 +30,60 @@ const Analytics = () => {
 
   if (loading) {
     return (
-      <div className="h-[70vh] flex items-center justify-center">
-        <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
+      <div className="h-[60vh] flex items-center justify-center">
+        <Loader2 className="w-12 h-12 text-indigo-600 animate-spin" />
       </div>
     );
   }
 
-  const topUrls = stats?.topUrls || [];
-
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="space-y-10 animate-in fade-in duration-700 max-w-5xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-2">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
-            <BarChart3 className="w-6 h-6" />
+          <div className="w-14 h-14 rounded-2xl bg-indigo-600/10 flex items-center justify-center text-indigo-400 border border-indigo-500/20">
+            <BarChart3 size={28} />
           </div>
           <div>
-            <h2 className="text-3xl font-black text-white">Deep Analytics</h2>
-            <p className="text-gray-500 text-sm mt-1">Granular insights into your link performance and audience.</p>
+            <h1 className="text-3xl font-black text-gray-100Tracking-tight">Deep Analytics</h1>
+            <p className="text-gray-500 text-sm mt-2 font-medium italic">Granular behavior insights and performance metrics.</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 hover:text-white transition-all text-sm">
-            <Calendar className="w-4 h-4" />
-            <span>Last 30 Days</span>
+          <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 hover:text-white transition-all text-[10px] font-black uppercase tracking-widest">
+            <Calendar size={14} />
+            Period Settings
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-500 text-white hover:bg-indigo-600 transition-all text-sm font-bold shadow-lg shadow-indigo-500/20">
-            <Download className="w-4 h-4" />
-            <span>Export Report</span>
+          <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-all text-[10px] font-black uppercase tracking-widest shadow-lg shadow-indigo-600/20">
+            <Download size={14} />
+            Export Data
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="p-8 rounded-3xl bg-gray-900 border border-gray-800 space-y-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400">
-                <Activity className="w-4 h-4" />
-              </div>
-              <h3 className="text-lg font-bold text-white">Traffic Trends</h3>
-            </div>
-            <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-md uppercase">Growth +14%</span>
-          </div>
-          <ClicksBarChart data={topUrls} />
-          <div className="p-4 rounded-2xl bg-gray-950/50 border border-gray-800">
-            <p className="text-xs text-gray-500 leading-relaxed">
-              Your overall traffic has been steadily increasing. The peak engagement usually occurs between <span className="text-white font-bold">2 PM - 6 PM</span>.
-            </p>
-          </div>
+      <div className="grid grid-cols-1 gap-10">
+        <div className="p-2">
+          <AnalyticsChart data={stats?.topUrls || []} />
         </div>
 
-        <div className="p-8 rounded-3xl bg-gray-900 border border-gray-800 space-y-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-                <PieChartIcon className="w-4 h-4" />
-              </div>
-              <h3 className="text-lg font-bold text-white">Audience Segments</h3>
+        <div className="p-10 rounded-2xl bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent border border-indigo-500/10 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity">
+            <TrendingUp size={120} />
+          </div>
+          <div className="flex flex-col md:flex-row items-center gap-10 relative z-10">
+            <div className="w-20 h-20 rounded-full bg-indigo-600/20 flex items-center justify-center text-indigo-400 border border-indigo-500/20 shrink-0 shadow-lg shadow-indigo-500/10">
+              <Activity size={32} />
             </div>
-            <span className="text-[10px] font-bold text-gray-500 bg-gray-800 px-2 py-1 rounded-md uppercase">Top Segment: Desktop</span>
-          </div>
-          <DevicePieChart />
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 rounded-2xl bg-gray-950/50 border border-gray-800">
-              <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">BOUNCE RATE</p>
-              <p className="text-xl font-black text-white">32.4%</p>
+            <div className="space-y-3 text-center md:text-left">
+              <h3 className="text-2xl font-black text-gray-100">Algorithmic Insights</h3>
+              <p className="text-gray-400 text-sm leading-relaxed max-w-2xl font-medium">
+                Our AI indicates that your engagement peaks around <span className="text-white font-bold uppercase">10 AM EST</span>. 
+                Integrating a custom domain could potentially increase trust and boost CTR by another <span className="text-indigo-400 font-bold uppercase tracking-widst">18.4%</span>.
+              </p>
             </div>
-            <div className="p-4 rounded-2xl bg-gray-950/50 border border-gray-800">
-              <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">AVG. SESSION</p>
-              <p className="text-xl font-black text-white">2m 45s</p>
-            </div>
+            <button className="md:ml-auto px-8 py-3.5 rounded-xl bg-gray-100 text-gray-900 font-black hover:bg-white transition-all text-[10px] uppercase tracking-widest shadow-xl shadow-white/5">
+              Unlock Strategy
+            </button>
           </div>
-        </div>
-      </div>
-
-      <div className="p-8 rounded-3xl bg-gradient-to-br from-indigo-500/10 via-transparent to-transparent border border-indigo-500/10">
-        <div className="flex flex-col md:flex-row items-center gap-8">
-          <div className="w-20 h-20 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 border border-indigo-500/20 shrink-0">
-            <TrendingUp className="w-10 h-10" />
-          </div>
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-xl font-bold text-white">Next-Level Optimization</h3>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-2xl">
-              Based on your current data, adding custom aliases could improve your CTR by another <span className="text-indigo-400 font-bold">12%</span>. 
-              Our AI recommends focusing on social media sharing during weekend mornings.
-            </p>
-          </div>
-          <button className="md:ml-auto px-6 py-3 rounded-xl bg-white text-gray-950 font-bold hover:bg-gray-200 transition-all">
-            Get Pro Insights
-          </button>
         </div>
       </div>
     </div>

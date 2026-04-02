@@ -7,21 +7,21 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-200 flex overflow-x-hidden">
-      {/* Sidebar - Fixed on desktop, sliding on mobile */}
+      {/* Fixed Sidebar for Desktop */}
       <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
       
-      {/* Backdrop for mobile */}
+      {/* Mobile Backdrop */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-gray-950/60 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-gray-950/80 backdrop-blur-sm z-40 md:hidden transition-all duration-300"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col md:ml-64 min-w-0">
+      <div className="flex-1 flex flex-col md:ml-64 min-w-0 transition-all duration-300">
         <Navbar onMenuClick={() => setIsSidebarOpen(true)} />
-        <main className="flex-1 p-4 md:p-8 mt-16 w-full max-w-7xl mx-auto">
+        <main className="flex-1 px-6 py-6 mt-16 max-w-6xl mx-auto w-full animate-in fade-in slide-in-from-bottom-2 duration-500">
           {children}
         </main>
       </div>

@@ -26,31 +26,31 @@ const Links = () => {
 
   if (loading) {
     return (
-      <div className="h-[70vh] flex items-center justify-center">
-        <Loader2 className="w-10 h-10 text-indigo-500 animate-spin" />
+      <div className="h-[60vh] flex items-center justify-center">
+        <Loader2 className="w-12 h-12 text-indigo-600 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="space-y-8 animate-in fade-in duration-500 max-w-5xl mx-auto">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-400">
-            <LinkIcon className="w-6 h-6" />
+          <div className="w-14 h-14 rounded-2xl bg-indigo-600/10 flex items-center justify-center text-indigo-400 border border-indigo-500/20">
+            <LinkIcon size={28} />
           </div>
           <div>
-            <h2 className="text-3xl font-black text-white">My Links</h2>
-            <p className="text-gray-500 text-sm mt-1">Manage, search, and monitor your shortened URLs.</p>
+            <h1 className="text-3xl font-black text-gray-100">My Links</h1>
+            <p className="text-gray-500 text-sm mt-1 font-medium italic">Manage and monitor your shortened routing system.</p>
           </div>
         </div>
         <button 
           onClick={() => { setRefreshing(true); fetchUrls(); }}
           disabled={refreshing}
-          className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-900 border border-gray-800 text-gray-400 hover:text-white transition-all disabled:opacity-50"
+          className="flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 hover:text-gray-100 transition-all disabled:opacity-50 font-bold uppercase text-[10px] tracking-widest shadow-lg"
         >
-          <RefreshCcw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
-          <span>Sync Links</span>
+          <RefreshCcw size={16} className={refreshing ? 'animate-spin' : ''} />
+          Sync Terminal
         </button>
       </div>
 
