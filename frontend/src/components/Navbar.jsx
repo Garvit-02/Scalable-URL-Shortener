@@ -1,54 +1,38 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Link2, LayoutDashboard, Home } from 'lucide-react';
+import { ShieldCheck, User, Menu } from 'lucide-react';
 
-const Navbar = () => {
-  const location = useLocation();
-
-  const isActive = (path) => location.pathname === path;
-
+const Navbar = ({ onMenuClick }) => {
   return (
-    <nav className="fixed top-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="p-2 rounded-lg bg-sky-500 group-hover:bg-sky-400 transition-colors">
-                <Link2 className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
-                TinyAI
-              </span>
-            </Link>
+    <header className="fixed top-0 right-0 left-0 md:left-64 h-16 bg-gray-950/80 backdrop-blur-md border-b border-gray-800 z-40 px-4 md:px-8 flex items-center justify-between">
+      <div className="flex items-center gap-4">
+        <button 
+          onClick={onMenuClick}
+          className="p-2 -ml-2 text-gray-400 hover:text-white md:hidden transition-colors"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-widest">
+          <ShieldCheck className="w-3 h-3" />
+          AI Security Active
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4">
+        <button className="p-2 text-gray-400 hover:text-white transition-colors">
+          {/* Notifications/Search can go here */}
+        </button>
+        <div className="h-8 w-[1px] bg-gray-800" />
+        <div className="flex items-center gap-3 pl-2">
+          <div className="text-right hidden sm:block">
+            <p className="text-xs font-bold text-white leading-none">Garvit</p>
+            <p className="text-[10px] text-gray-500 mt-1">Admin Account</p>
           </div>
-          
-          <div className="flex items-center gap-2">
-            <Link
-              to="/"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-                isActive('/') 
-                  ? 'bg-slate-800 text-sky-400' 
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
-            >
-              <Home className="w-4 h-4" />
-              <span className="text-sm font-medium">Shorten</span>
-            </Link>
-            <Link
-              to="/dashboard"
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-                isActive('/dashboard') 
-                  ? 'bg-slate-800 text-sky-400' 
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-              }`}
-            >
-              <LayoutDashboard className="w-4 h-4" />
-              <span className="text-sm font-medium">Dashboard</span>
-            </Link>
+          <div className="w-8 h-8 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center text-gray-400 overflow-hidden">
+            <User className="w-5 h-5" />
           </div>
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
 

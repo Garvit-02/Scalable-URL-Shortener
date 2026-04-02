@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Loader2 } from 'lucide-react';
+import { Send, Link as LinkIcon, Loader2 } from 'lucide-react';
 
 const UrlForm = ({ onShorten, isLoading }) => {
   const [url, setUrl] = useState('');
@@ -12,32 +12,35 @@ const UrlForm = ({ onShorten, isLoading }) => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
-      <form onSubmit={handleSubmit} className="relative group">
+    <form onSubmit={handleSubmit} className="w-full max-w-3xl">
+      <div className="relative group">
+        <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-gray-500 group-focus-within:text-indigo-500 transition-colors">
+          <LinkIcon className="w-5 h-5" />
+        </div>
         <input
           type="url"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="Paste your long URL here..."
           required
-          className="w-full h-16 pl-6 pr-32 rounded-2xl bg-slate-900 border border-slate-700 focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10 transition-all outline-none text-lg text-white placeholder:text-slate-500 shadow-2xl group-hover:border-slate-600"
+          className="w-full bg-gray-900 border-2 border-gray-800 text-white pl-14 pr-32 py-5 rounded-2xl focus:outline-none focus:border-indigo-500/50 focus:ring-4 focus:ring-indigo-500/10 transition-all text-lg placeholder:text-gray-600"
         />
         <button
           type="submit"
-          disabled={isLoading || !url}
-          className="absolute right-2 top-2 bottom-2 px-6 rounded-xl bg-sky-500 hover:bg-sky-400 disabled:bg-slate-800 disabled:text-slate-600 text-white font-semibold transition-all flex items-center gap-2 active:scale-95"
+          disabled={isLoading}
+          className="absolute right-3 top-2.5 bottom-2.5 px-6 rounded-xl bg-indigo-500 hover:bg-indigo-600 text-white font-bold flex items-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 shadow-lg shadow-indigo-500/20"
         >
           {isLoading ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
             <>
-              Shorten
+              <span>Shorten</span>
               <Send className="w-4 h-4" />
             </>
           )}
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

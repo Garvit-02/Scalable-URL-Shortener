@@ -1,21 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
+import MainLayout from './layout/MainLayout';
+import Shorten from './pages/Shorten';
 import Dashboard from './pages/Dashboard';
+
+import Links from './pages/Links';
+import Analytics from './pages/Analytics';
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-slate-950 selection:bg-sky-500 selection:text-white">
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </main>
-      </div>
+      <MainLayout>
+        <Routes>
+          <Route path="/" element={<Shorten />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/links" element={<Links />} />
+          <Route path="/analytics" element={<Analytics />} />
+        </Routes>
+      </MainLayout>
     </Router>
   );
 }

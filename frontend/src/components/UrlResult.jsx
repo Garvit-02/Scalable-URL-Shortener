@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Copy, Check, ExternalLink } from 'lucide-react';
+import { Copy, ExternalLink, Check, QrCode } from 'lucide-react';
 
 const UrlResult = ({ result }) => {
   const [copied, setCopied] = useState(false);
-
-  if (!result) return null;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(result.shortUrl);
@@ -13,34 +11,40 @@ const UrlResult = ({ result }) => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mt-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div className="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 shadow-xl overflow-hidden relative">
-        <div className="absolute top-0 right-0 p-4 opacity-10">
-          <Check className="w-24 h-24 text-sky-500" />
+    <div className="mt-8 w-full max-w-3xl animate-in fade-in slide-in-from-top-4 duration-500">
+      <div className="bg-gray-900 border border-gray-800 rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden group">
+        <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+          <QrCode className="w-32 h-32" />
         </div>
         
         <div className="relative z-10">
-          <p className="text-slate-500 text-sm font-medium mb-1">Your shortened link is ready!</p>
-          <div className="flex items-center justify-between gap-4 p-4 rounded-xl bg-slate-950/50 border border-slate-800 mt-3">
-            <span className="text-sky-400 font-mono text-lg truncate flex-1">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-400 mb-2">Original URL</p>
+          <p className="text-gray-400 text-sm truncate mb-6 border-b border-gray-800 pb-4 max-w-md">
+            {result.originalUrl}
+          </p>
+
+          <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400 mb-2">Short URL Generated</p>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex-1 bg-gray-950 border border-gray-800 px-5 py-4 rounded-2xl text-white font-mono text-lg break-all">
               {result.shortUrl}
-            </span>
-            <div className="flex items-center gap-2">
+            </div>
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               <button
                 onClick={handleCopy}
-                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all active:scale-90"
-                title="Copy to clipboard"
+                className={`flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold transition-all ${
+                  copied ? 'bg-emerald-500 text-white' : 'bg-gray-800 text-white hover:bg-gray-700'
+                }`}
               >
-                {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
+                {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                <span>{copied ? 'Copied' : 'Copy'}</span>
               </button>
               <a
                 href={result.shortUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-500 transition-all active:scale-90"
-                title="Visit link"
+                className="p-4 rounded-2xl bg-indigo-500 hover:bg-indigo-600 text-white transition-all shadow-lg shadow-indigo-500/20"
               >
-                <ExternalLink className="w-5 h-5" />
+                <ExternalLink className="w-6 h-6" />
               </a>
             </div>
           </div>
